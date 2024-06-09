@@ -1,0 +1,58 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+int main() {
+    srand(time(0)); 
+
+    string choices[3] = {"Batu", "Gunting", "Kertas"};
+
+    cout << "\n====== Selamat datang di Game Batu Gunting Kertas ======" << endl;
+
+    while (true) {
+        int aiChoice = rand() % 3; // Pilihan acak AI
+        string userChoice;
+
+        cout << "\nPilihan Anda: " << endl;
+        cout << "0. Batu" << endl;
+        cout << "1. Gunting" << endl;
+        cout << "2. Kertas" << endl;
+        cout << "Masukkan pilihan Anda (0, 1, 2): ";
+        cin >> userChoice;
+
+        int userChoiceInt = stoi(userChoice); // Mengonversi input pengguna menjadi integer
+
+        if (userChoiceInt < 0 || userChoiceInt > 2) {
+            cout << "Pilihan tidak valid. Masukkan angka antara 0 sampai 2." << endl;
+            continue; // Melanjutkan iterasi loop untuk meminta input yang valid
+        }
+
+        cout << "AI memilih: " << choices[aiChoice] << endl;
+        cout << "Anda memilih: " << choices[userChoiceInt] << endl;
+
+        // Menentukan pemenang
+        if (aiChoice == userChoiceInt) {
+            cout << "Hasil: Seri" << endl;
+        } else if ((userChoiceInt == 0 && aiChoice == 1) ||
+                   (userChoiceInt == 1 && aiChoice == 2) ||
+                   (userChoiceInt == 2 && aiChoice == 0)) {
+            cout << "Hasil: Anda Menang!" << endl;
+        } else {
+            cout << "Hasil: Anda Kalah!" << endl;
+        }
+
+        // Bertanya kepada pengguna apakah ingin bermain lagi
+        char playAgain;
+        cout << "Apakah Anda ingin bermain lagi? (y/n): ";
+        cin >> playAgain;
+        if (playAgain != 'y' && playAgain != 'Y') {
+            break; // Keluar dari loop jika pengguna tidak ingin bermain lagi
+        }
+    }
+
+    cout << "Terima kasih telah bermain!" << endl;
+
+    return 0;
+}
